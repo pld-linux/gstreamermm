@@ -8,7 +8,7 @@ Name:		gstreamermm
 Version:	0.10.7.3
 Release:	1
 License:	LGPL v2+
-Group:		Applications
+Group:		Libraries
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/gstreamermm/0.10/%{name}-%{version}.tar.bz2
 # Source0-md5:	48df9161cec157cd74c2aac0d97d2c0f
 Patch0:		%{name}-gcc45.patch
