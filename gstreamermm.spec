@@ -7,7 +7,7 @@ Summary(pl.UTF-8):	Wiązania C++ dla GStreamer
 Name:		gstreamermm
 Version:	0.10.7.3
 Release:	1
-License:	LGPL
+License:	LGPL v2+
 Group:		Applications
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/gstreamermm/0.10/%{name}-%{version}.tar.bz2
 # Source0-md5:	48df9161cec157cd74c2aac0d97d2c0f
