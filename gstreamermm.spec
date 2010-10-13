@@ -12,7 +12,10 @@ Group:		Libraries
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/gstreamermm/0.10/%{name}-%{version}.tar.bz2
 # Source0-md5:	48df9161cec157cd74c2aac0d97d2c0f
 Patch0:		%{name}-gcc45.patch
+BuildRequires:	autoconf
+BuildRequires:	automake
 BuildRequires:	glibmm-devel >= 2.18.1
+BuildRequires:	gstreamer-plugins-base-devel >= 0.10.0
 BuildRequires:	gtkmm-devel >= 2.12.0
 BuildRequires:	libxml++-devel >= 2.14.0
 BuildRequires:	pkgconfig
@@ -69,6 +72,11 @@ Biblioteki statyczne gstreamermm.
 %patch0 -p1
 
 %build
+%{__libtoolize}
+%{__aclocal} -I build
+%{__autoconf}
+%{__autoheader}
+%{__automake}
 %configure \
 	%{?with_static_libs:--enable-static}
 %{__make}
