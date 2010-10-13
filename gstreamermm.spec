@@ -63,10 +63,10 @@ Group:		Development/Libraries
 Requires:	%{name}-devel = %{version}-%{release}
 
 %description static
-gstreamermm static libraries.
+gstreamermm static library.
 
 %description static -l pl.UTF-8
-Biblioteki statyczne gstreamermm.
+Biblioteka statyczne gstreamermm.
 
 %prep
 %setup -q
