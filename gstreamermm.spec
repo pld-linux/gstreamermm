@@ -5,12 +5,12 @@
 Summary:	A C++ bindings for the GStreamer
 Summary(pl.UTF-8):	Wiązania C++ dla GStreamer
 Name:		gstreamermm
-Version:	0.10.7.3
+Version:	0.10.8
 Release:	1
 License:	LGPL v2+
 Group:		Libraries
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/gstreamermm/0.10/%{name}-%{version}.tar.bz2
-# Source0-md5:	48df9161cec157cd74c2aac0d97d2c0f
+# Source0-md5:	aa0ab3f4335e19a7a9b95a42cc2decba
 Patch0:		%{name}-gcc45.patch
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -70,7 +70,7 @@ Biblioteka statyczne gstreamermm.
 
 %prep
 %setup -q
-%patch0 -p1
+#%%patch0 -p1
 
 %build
 %{__libtoolize}
