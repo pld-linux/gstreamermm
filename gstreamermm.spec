@@ -19,6 +19,7 @@ BuildRequires:	gstreamer-plugins-base-devel >= 0.10.0
 BuildRequires:	gtkmm-devel >= 2.12.0
 BuildRequires:	libtool
 BuildRequires:	libxml++-devel >= 2.14.0
+BuildRequires:	mm-common
 BuildRequires:	pkgconfig
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
