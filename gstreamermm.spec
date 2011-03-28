@@ -6,7 +6,7 @@ Summary:	A C++ bindings for the GStreamer
 Summary(pl.UTF-8):	Wiązania C++ dla GStreamer
 Name:		gstreamermm
 Version:	0.10.8
-Release:	1
+Release:	2
 License:	LGPL v2+
 Group:		Libraries
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/gstreamermm/0.10/%{name}-%{version}.tar.bz2
