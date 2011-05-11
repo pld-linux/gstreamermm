@@ -2,8 +2,8 @@
 # Conditional build:
 %bcond_without  static_libs	# don't build static libraries
 #
-Summary:	A C++ bindings for the GStreamer
-Summary(pl.UTF-8):	Wiązania C++ dla GStreamer
+Summary:	A C++ bindings for the GStreamer library
+Summary(pl.UTF-8):	Wiązania C++ do biblioteki GStreamera
 Name:		gstreamermm
 Version:	0.10.9.1
 Release:	1
@@ -11,15 +11,19 @@ License:	LGPL v2+
 Group:		Libraries
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/gstreamermm/0.10/%{name}-%{version}.tar.bz2
 # Source0-md5:	cf04c3ca916d28fc30682be04cf80dc2
-BuildRequires:	autoconf
-BuildRequires:	automake
-BuildRequires:	glibmm-devel >= 2.18.1
-BuildRequires:	gstreamer-plugins-base-devel >= 0.10.0
-BuildRequires:	gtkmm-devel >= 2.12.0
-BuildRequires:	libtool
-BuildRequires:	libxml++-devel >= 2.14.0
-BuildRequires:	mm-common
+BuildRequires:	autoconf >= 2.59
+BuildRequires:	automake >= 1:1.9
+BuildRequires:	glibmm-devel >= 2.26.0
+BuildRequires:	gstreamer-devel >= 0.10.32
+BuildRequires:	gstreamer-plugins-base-devel >= 0.10.32
+BuildRequires:	gtkmm-devel >= 2.12
+BuildRequires:	libtool >= 2:1.5
+BuildRequires:	libxml++-devel >= 2.14
+BuildRequires:	mm-common >= 0.9.5
 BuildRequires:	pkgconfig
+Requires:	glibmm >= 2.26.0
+Requires:	gstreamer >= 0.10.32
+Requires:	gstreamer-plugins-base >= 0.10.32
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -34,15 +38,31 @@ multimedialnych w C++.
 
 %package devel
 Summary:	gstreamermm header files
-Summary(pl.UTF-8):	Pliki nagłówkowe gstreamermm
+Summary(pl.UTF-8):	Pliki nagłówkowe biblioteki gstreamermm
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
+Requires:	glibmm-devel >= 2.26.0
+Requires:	gstreamer-devel >= 0.10.32
+Requires:	gstreamer-plugins-base-devel >= 0.10.32
+Requires:	libxml++-devel >= 2.14
 
 %description devel
 Header files for gstreamermm library.
 
 %description devel -l pl.UTF-8
 Pliki nagłówkowe biblioteki gstreamermm.
+
+%package static
+Summary:	gstreamermm static libraries
+Summary(pl.UTF-8):	Biblioteki statyczne gstreamermm
+Group:		Development/Libraries
+Requires:	%{name}-devel = %{version}-%{release}
+
+%description static
+gstreamermm static libraries.
+
+%description static -l pl.UTF-8
+Biblioteki statyczne gstreamermm.
 
 %package doc
 Summary:	Reference documentation for gstreamermm
@@ -55,18 +75,6 @@ Reference documentation for gstreamermm.
 
 %description doc -l pl.UTF-8
 Szczegółowa dokumentacja gstreamermm.
-
-%package static
-Summary:	gstreamermm static libraries
-Summary(pl.UTF-8):	Biblioteki statyczne gstreamermm
-Group:		Development/Libraries
-Requires:	%{name}-devel = %{version}-%{release}
-
-%description static
-gstreamermm static library.
-
-%description static -l pl.UTF-8
-Biblioteka statyczne gstreamermm.
 
 %prep
 %setup -q
@@ -111,14 +119,14 @@ rm -rf $RPM_BUILD_ROOT
 %{_includedir}/gstreamermm-0.10
 %{_pkgconfigdir}/gstreamermm-0.10.pc
 
-%files doc
-%defattr(644,root,root,755)
-%{_docdir}/gstreamermm-0.10
-%{_datadir}/devhelp/books/gstreamermm-0.10
-
 %if %{with static_libs}
 %files static
 %defattr(644,root,root,755)
 %{_libdir}/libgstreamermm-0.10.a
 %{_libdir}/libgstreamermm_get_plugin_defs-0.10.a
 %endif
+
+%files doc
+%defattr(644,root,root,755)
+%{_docdir}/gstreamermm-0.10
+%{_datadir}/devhelp/books/gstreamermm-0.10
