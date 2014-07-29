@@ -5,29 +5,28 @@
 Summary:	A C++ bindings for the GStreamer library
 Summary(pl.UTF-8):	Wiązania C++ do biblioteki GStreamera
 Name:		gstreamermm
-Version:	0.10.11
+Version:	1.0.10
 Release:	1
 License:	LGPL v2+
 Group:		Libraries
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/gstreamermm/0.10/%{name}-%{version}.tar.xz
-# Source0-md5:	c2ca0b192a949a15edb863c1a59a1547
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/gstreamermm/1.0/%{name}-%{version}.tar.xz
+# Source0-md5:	32c7718620acb70c495091d5c71abdee
 BuildRequires:	autoconf >= 2.59
 BuildRequires:	automake >= 1:1.9
-BuildRequires:	glibmm-devel >= 2.33.4
-BuildRequires:	gstreamer-devel >= 0.10.36
-BuildRequires:	gstreamer-plugins-base-devel >= 0.10.36
+BuildRequires:	glibmm-devel >= 2.36.0
+BuildRequires:	gstreamer-devel >= 1.0.10
+BuildRequires:	gstreamer-plugins-base-devel >= 1.0.10
 # for not packaged examples only
 #BuildRequires:	gtkmm3-devel >= 3.0
 BuildRequires:	libtool >= 2:1.5
-BuildRequires:	libxml++-devel >= 2.14
-BuildRequires:	mm-common >= 0.9.5
+BuildRequires:	m4
+BuildRequires:	mm-common >= 0.9.6
 BuildRequires:	pkgconfig
 BuildRequires:	tar >= 1:1.22
 BuildRequires:	xz
-Requires:	glibmm >= 2.33.4
-Requires:	gstreamer >= 0.10.36
-Requires:	gstreamer-plugins-base >= 0.10.36
-Requires:	libxml++ >= 2.14
+Requires:	glibmm >= 2.36.0
+Requires:	gstreamer >= 1.0.10
+Requires:	gstreamer-plugins-base >= 1.0.10
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -45,10 +44,9 @@ Summary:	gstreamermm header files
 Summary(pl.UTF-8):	Pliki nagłówkowe biblioteki gstreamermm
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
-Requires:	glibmm-devel >= 2.33.4
-Requires:	gstreamer-devel >= 0.10.36
-Requires:	gstreamer-plugins-base-devel >= 0.10.36
-Requires:	libxml++-devel >= 2.14
+Requires:	glibmm-devel >= 2.36.0
+Requires:	gstreamer-devel >= 1.0.10
+Requires:	gstreamer-plugins-base-devel >= 1.0.10
 
 %description devel
 Header files for gstreamermm library.
@@ -99,6 +97,9 @@ rm -rf $RPM_BUILD_ROOT
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
+# obsoleted by pkg-config
+%{__rm} $RPM_BUILD_ROOT%{_libdir}/libgstreamermm*.la
+
 %clean
 rm -rf $RPM_BUILD_ROOT
 
@@ -108,29 +109,31 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %doc AUTHORS ChangeLog NEWS README
-%attr(755,root,root) %{_libdir}/libgstreamermm-0.10.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libgstreamermm-0.10.so.2
-%attr(755,root,root) %{_libdir}/libgstreamermm_get_plugin_defs-0.10.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libgstreamermm_get_plugin_defs-0.10.so.2
+%attr(755,root,root) %{_libdir}/libgstreamermm-1.0.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libgstreamermm-1.0.so.0
+%attr(755,root,root) %{_libdir}/libgstreamermm_get_plugin_defs-1.0.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libgstreamermm_get_plugin_defs-1.0.so.0
 
 %files devel
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libgstreamermm-0.10.so
-%attr(755,root,root) %{_libdir}/libgstreamermm_get_plugin_defs-0.10.so
-%{_libdir}/libgstreamermm-0.10.la
-%{_libdir}/libgstreamermm_get_plugin_defs-0.10.la
-%{_libdir}/gstreamermm-0.10
-%{_includedir}/gstreamermm-0.10
-%{_pkgconfigdir}/gstreamermm-0.10.pc
+%attr(755,root,root) %{_libdir}/libgstreamermm-1.0.so
+%attr(755,root,root) %{_libdir}/libgstreamermm_get_plugin_defs-1.0.so
+%dir %{_libdir}/gstreamermm-1.0
+%dir %{_libdir}/gstreamermm-1.0/gen
+%attr(755,root,root) %{_libdir}/gstreamermm-1.0/gen/generate_plugin_gmmproc_file
+%{_libdir}/gstreamermm-1.0/gen/m4
+%{_libdir}/gstreamermm-1.0/include
+%{_includedir}/gstreamermm-1.0
+%{_pkgconfigdir}/gstreamermm-1.0.pc
 
 %if %{with static_libs}
 %files static
 %defattr(644,root,root,755)
-%{_libdir}/libgstreamermm-0.10.a
-%{_libdir}/libgstreamermm_get_plugin_defs-0.10.a
+%{_libdir}/libgstreamermm-1.0.a
+%{_libdir}/libgstreamermm_get_plugin_defs-1.0.a
 %endif
 
 %files doc
 %defattr(644,root,root,755)
-%{_docdir}/gstreamermm-0.10
-%{_datadir}/devhelp/books/gstreamermm-0.10
+%{_docdir}/gstreamermm-1.0
+%{_datadir}/devhelp/books/gstreamermm-1.0
