@@ -5,17 +5,17 @@
 Summary:	A C++ bindings for the GStreamer library
 Summary(pl.UTF-8):	Wiązania C++ do biblioteki GStreamera
 Name:		gstreamermm
-Version:	1.0.10
+Version:	1.4.3
 Release:	1
 License:	LGPL v2+
 Group:		Libraries
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/gstreamermm/1.0/%{name}-%{version}.tar.xz
-# Source0-md5:	32c7718620acb70c495091d5c71abdee
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/gstreamermm/1.4/%{name}-%{version}.tar.xz
+# Source0-md5:	8f6c4b85083308def933eab1433a1865
 BuildRequires:	autoconf >= 2.59
 BuildRequires:	automake >= 1:1.9
 BuildRequires:	glibmm-devel >= 2.36.0
-BuildRequires:	gstreamer-devel >= 1.0.10
-BuildRequires:	gstreamer-plugins-base-devel >= 1.0.10
+BuildRequires:	gstreamer-devel >= 1.4.3
+BuildRequires:	gstreamer-plugins-base-devel >= 1.4.3
 # for not packaged examples only
 #BuildRequires:	gtkmm3-devel >= 3.0
 BuildRequires:	libtool >= 2:1.5
@@ -25,8 +25,8 @@ BuildRequires:	pkgconfig
 BuildRequires:	tar >= 1:1.22
 BuildRequires:	xz
 Requires:	glibmm >= 2.36.0
-Requires:	gstreamer >= 1.0.10
-Requires:	gstreamer-plugins-base >= 1.0.10
+Requires:	gstreamer >= 1.4.3
+Requires:	gstreamer-plugins-base >= 1.4.3
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -45,8 +45,8 @@ Summary(pl.UTF-8):	Pliki nagłówkowe biblioteki gstreamermm
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 Requires:	glibmm-devel >= 2.36.0
-Requires:	gstreamer-devel >= 1.0.10
-Requires:	gstreamer-plugins-base-devel >= 1.0.10
+Requires:	gstreamer-devel >= 1.4.3
+Requires:	gstreamer-plugins-base-devel >= 1.4.3
 
 %description devel
 Header files for gstreamermm library.
