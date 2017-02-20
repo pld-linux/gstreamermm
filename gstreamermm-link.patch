@@ -1,0 +1,8 @@
+--- gstreamermm-1.8.0/gst-plugins-bad/gstreamermm-plugins-bad/Makefile.am.orig	2016-09-17 14:00:56.000000000 +0200
++++ gstreamermm-1.8.0/gst-plugins-bad/gstreamermm-plugins-bad/Makefile.am	2017-02-19 21:44:45.282971631 +0100
+@@ -30,4 +30,4 @@
+ 
+ libgstreamermm_plugins_bad_@GSTREAMERMM_API_VERSION@_la_SOURCES = $(binding_sources)
+ libgstreamermm_plugins_bad_@GSTREAMERMM_API_VERSION@_la_LDFLAGS = -no-undefined -version-info $(GSTREAMERMM_SO_VERSION)
+-libgstreamermm_plugins_bad_@GSTREAMERMM_API_VERSION@_la_LIBADD  = $(GSTREAMERMM_PLUGINS_BAD_LIBS) $(local_libadd)
++libgstreamermm_plugins_bad_@GSTREAMERMM_API_VERSION@_la_LIBADD  = $(GSTREAMERMM_PLUGINS_BAD_LIBS) $(GSTREAMERMM_GL_LIBS) $(local_libadd)
