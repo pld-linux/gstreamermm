@@ -1,14 +1,14 @@
 #
 # Conditional build:
 %bcond_without	static_libs	# static libraries
-%bcond_without	gstpd		# gstreamer-plugins-bad library
-%bcond_without	opengl		# gstreamer-gl library support (in plugins-bad library)
+%bcond_with	gstpd		# gstreamer-plugins-bad library
+%bcond_with	opengl		# gstreamer-gl library support (in plugins-bad library)
 #
 Summary:	A C++ bindings for the GStreamer library
 Summary(pl.UTF-8):	Wiązania C++ do biblioteki GStreamera
 Name:		gstreamermm
 Version:	1.8.0
-Release:	1
+Release:	2
 License:	LGPL v2+
 Group:		Libraries
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/gstreamermm/1.8/%{name}-%{version}.tar.xz
