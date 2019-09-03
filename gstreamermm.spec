@@ -1,28 +1,22 @@
 #
 # Conditional build:
 %bcond_without	static_libs	# static libraries
-%bcond_with	gstpd		# gstreamer-plugins-bad library
-%bcond_with	opengl		# gstreamer-gl library support (in plugins-bad library)
 #
 Summary:	A C++ bindings for the GStreamer library
 Summary(pl.UTF-8):	Wiązania C++ do biblioteki GStreamera
 Name:		gstreamermm
-Version:	1.8.0
-Release:	3
+Version:	1.10.0
+Release:	1
 License:	LGPL v2+
 Group:		Libraries
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/gstreamermm/1.8/%{name}-%{version}.tar.xz
-# Source0-md5:	31246cf2f37b7ff48d45c8be98425e93
-Patch0:		%{name}-link.patch
-Patch1:		%{name}-gst1.12.patch
-Patch2:		%{name}-gcc7.patch
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/gstreamermm/1.10/%{name}-%{version}.tar.xz
+# Source0-md5:	57e9300f247ad27a4ef4df4fecc137c9
 URL:		https://gstreamer.freedesktop.org/bindings/cplusplus.html
 BuildRequires:	autoconf >= 2.59
 BuildRequires:	automake >= 1:1.9
 BuildRequires:	glibmm-devel >= 2.48.0
-BuildRequires:	gstreamer-devel >= 1.8.0
-%{?with_gstpd:BuildRequires:	gstreamer-plugins-bad-devel >= 1.8.0}
-BuildRequires:	gstreamer-plugins-base-devel >= 1.8.0
+BuildRequires:	gstreamer-devel >= 1.10.0
+BuildRequires:	gstreamer-plugins-base-devel >= 1.10.0
 # for not packaged examples only
 #BuildRequires:	gtkmm3-devel >= 3.0
 BuildRequires:	libstdc++-devel >= 6:4.7
@@ -33,8 +27,9 @@ BuildRequires:	pkgconfig
 BuildRequires:	tar >= 1:1.22
 BuildRequires:	xz
 Requires:	glibmm >= 2.48.0
-Requires:	gstreamer >= 1.8.0
-Requires:	gstreamer-plugins-base >= 1.8.0
+Requires:	gstreamer >= 1.10.0
+Requires:	gstreamer-plugins-base >= 1.10.0
+Obsoletes:	gstreamermm-plugins-bad < 1.10
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -53,8 +48,9 @@ Summary(pl.UTF-8):	Pliki nagłówkowe biblioteki gstreamermm
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 Requires:	glibmm-devel >= 2.48.0
-Requires:	gstreamer-devel >= 1.8.0
-Requires:	gstreamer-plugins-base-devel >= 1.8.0
+Requires:	gstreamer-devel >= 1.10.0
+Requires:	gstreamer-plugins-base-devel >= 1.10.0
+Obsoletes:	gstreamermm-plugins-bad-devel < 1.10
 
 %description devel
 Header files for gstreamermm library.
@@ -67,51 +63,13 @@ Summary:	Static gstreamermm library
 Summary(pl.UTF-8):	Biblioteka statyczna gstreamermm
 Group:		Development/Libraries
 Requires:	%{name}-devel = %{version}-%{release}
+Obsoletes:	gstreamermm-plugins-bad-static < 1.10
 
 %description static
 Static gstreamermm library.
 
 %description static -l pl.UTF-8
 Biblioteka statyczna gstreamermm.
-
-%package plugins-bad
-Summary:	C++ bindings for the GStreamer plugins-bad library
-Summary(pl.UTF-8):	Wiązania C++ do biblitoteki GStreamera plugins-bad
-Group:		Libraries
-Requires:	%{name} = %{version}-%{release}
-Requires:	gstreamer-plugins-bad >= 1.8.0
-
-%description plugins-bad
-C++ bindings for the GStreamer plugins-bad library.
-
-%description plugins-bad -l pl.UTF-8
-Wiązania C++ do biblitoteki GStreamera plugins-bad.
-
-%package plugins-bad-devel
-Summary:	Header files for gstreamermm-plugins-bad library
-Summary(pl.UTF-8):	Pliki nagłówkowe biblioteki gstreamermm-plugins-bad
-Group:		Development/Libraries
-Requires:	%{name}-devel = %{version}-%{release}
-Requires:	%{name}-plugins-bad = %{version}-%{release}
-Requires:	gstreamer-plugins-bad-devel >= 1.8.0
-
-%description plugins-bad-devel
-Header files for gstreamermm-plugins-bad library.
-
-%description plugins-bad-devel -l pl.UTF-8
-Pliki nagłówkowe biblioteki gstreamermm-plugins-bad.
-
-%package plugins-bad-static
-Summary:	Static gstreamermm-plugins-bad library
-Summary(pl.UTF-8):	Biblioteka statyczna gstreamermm-plugins-bad
-Group:		Development/Libraries
-Requires:	%{name}-plugins-bad-devel = %{version}-%{release}
-
-%description plugins-bad-static
-Static gstreamermm-plugins-bad library.
-
-%description plugins-bad-static -l pl.UTF-8
-Biblioteka statyczna gstreamermm-plugins-bad.
 
 %package doc
 Summary:	Reference documentation for gstreamermm
@@ -127,9 +85,6 @@ Szczegółowa dokumentacja gstreamermm.
 
 %prep
 %setup -q
-%patch0 -p1
-%patch1 -p1
-%patch2 -p1
 
 %build
 %{__libtoolize}
@@ -138,8 +93,6 @@ Szczegółowa dokumentacja gstreamermm.
 %{__autoheader}
 %{__automake}
 %configure \
-	%{!?with_opengl:--disable-gl} \
-	%{!?with_gstpd:--disable-plugins-bad} \
 	--disable-silent-rules \
 	%{?with_static_libs:--enable-static}
 %{__make}
@@ -158,9 +111,6 @@ rm -rf $RPM_BUILD_ROOT
 
 %post   -p /sbin/ldconfig
 %postun -p /sbin/ldconfig
-
-%post   plugins-bad -p /sbin/ldconfig
-%postun plugins-bad -p /sbin/ldconfig
 
 %files
 %defattr(644,root,root,755)
@@ -183,24 +133,6 @@ rm -rf $RPM_BUILD_ROOT
 %files static
 %defattr(644,root,root,755)
 %{_libdir}/libgstreamermm-1.0.a
-%endif
-
-%if %{with gstpd}
-%files plugins-bad
-%defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libgstreamermm-plugins-bad-1.0.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libgstreamermm-plugins-bad-1.0.so.1
-
-%files plugins-bad-devel
-%defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libgstreamermm-plugins-bad-1.0.so
-%{_pkgconfigdir}/gstreamermm-plugins-bad-1.0.pc
-
-%if %{with static_libs}
-%files plugins-bad-static
-%defattr(644,root,root,755)
-%{_libdir}/libgstreamermm-plugins-bad-1.0.a
-%endif
 %endif
 
 %files doc
